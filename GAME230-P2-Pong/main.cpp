@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
@@ -6,12 +8,16 @@
 #include <SFML/OpenGL.hpp>
 #include <SFML/Main.hpp>
 
+#include "Setting.h"
+#include "Ball.h"
+#include "Paddle.h"
+
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
-
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "PONG");
+	Ball ball(float(WINDOW_WIDTH / 2), float(WINDOW_HEIGHT / 2));
+	Paddle paddleL(20.0f, float(WINDOW_HEIGHT / 2));
+	Paddle paddleR(float(WINDOW_WIDTH - 20), float(WINDOW_HEIGHT / 2));
 
 	while (window.isOpen())
 	{
@@ -22,8 +28,28 @@ int main()
 				window.close();
 		}
 
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		{
+			paddleL.moveUp();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+		{
+			paddleL.moveDown();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			paddleR.moveUp();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			paddleR.moveDown();
+		}
+
 		window.clear();
-		window.draw(shape);
+		ball.update();
+		ball.draw(window);
+		paddleL.draw(window);
+		paddleR.draw(window);
 		window.display();
 	}
 
