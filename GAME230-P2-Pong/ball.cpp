@@ -44,7 +44,7 @@ void Ball::checkCollision()
 	if (this->position.x + this->radius<0 || this->position.x - this->radius>WINDOW_WIDTH) {
 		//this->angle = 180 - this->angle;
 		this->position.x < WINDOW_WIDTH / 2 ? p2Score++ : p1Score++;
-		std::cout << p1Score << " " << p2Score << std::endl;
+		this->angle = this->position.x < WINDOW_WIDTH / 2 ? 180 : 0;
 		this->position.x = float(WINDOW_WIDTH / 2);
 		this->position.y = float(WINDOW_HEIGHT / 2);
 		this->speed = 0.3f;
@@ -58,7 +58,6 @@ void Ball::checkCollision()
 			float collideAngle = atan2f(this->position.y - this->paddles.at(i)->position.y, this->position.x - this->paddles.at(i)->position.x) * 180 / 3.14f;
 			float sideAngle = atan2f(this->radius + this->paddles.at(i)->height / 2, this->radius + this->paddles.at(i)->width / 2) * 180 / 3.14f;
 			if (!(abs(collideAngle) > sideAngle && abs(collideAngle) < (180.0f - sideAngle))) {
-				std::cout << collideAngle << " " << this->angle << std::endl;
 				this->angle = abs(collideAngle) * (this->angle >= 0 ? 1 : -1);
 				if (this->speed < 1.0f) {
 					this->speed += 0.02f;

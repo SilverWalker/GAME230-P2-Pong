@@ -46,9 +46,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="GALS.ttf">
-      <Filter>Source Files</Filter>
-    </Font>
     <Font Include="JustMyType-KePl.ttf">
       <Filter>Source Files</Filter>
     </Font>
