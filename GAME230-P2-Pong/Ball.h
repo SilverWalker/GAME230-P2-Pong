@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include "Paddle.h"
 
 class Ball {
 public:
@@ -10,8 +11,9 @@ public:
 	float angle;
 	float radius;
 	sf::CircleShape shape;
+	std::vector<Paddle*> paddles;
 
-	Ball(float pX, float pY);
+	Ball(float pX, float pY, std::vector<Paddle*> paddles);
 	void update();
 	void draw(sf::RenderWindow& window);
 	void checkCollision();

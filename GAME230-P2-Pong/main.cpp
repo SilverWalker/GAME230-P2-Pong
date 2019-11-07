@@ -15,9 +15,12 @@
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "PONG");
-	Ball ball(float(WINDOW_WIDTH / 2), float(WINDOW_HEIGHT / 2));
-	Paddle paddleL(20.0f, float(WINDOW_HEIGHT / 2));
-	Paddle paddleR(float(WINDOW_WIDTH - 20), float(WINDOW_HEIGHT / 2));
+	std::vector<Paddle*> paddles;
+	Paddle* paddleL = new Paddle(20.0f, float(WINDOW_HEIGHT / 2));
+	Paddle* paddleR = new Paddle(float(WINDOW_WIDTH - 20), float(WINDOW_HEIGHT / 2));
+	paddles.push_back(paddleL);
+	paddles.push_back(paddleR);
+	Ball ball(float(WINDOW_WIDTH / 2), float(WINDOW_HEIGHT / 2), paddles);
 
 	while (window.isOpen())
 	{
@@ -30,26 +33,26 @@ int main()
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			paddleL.moveUp();
+			paddleL->moveUp();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
 		{
-			paddleL.moveDown();
+			paddleL->moveDown();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-			paddleR.moveUp();
+			paddleR->moveUp();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
-			paddleR.moveDown();
+			paddleR->moveDown();
 		}
 
 		window.clear();
 		ball.update();
+		paddleL->draw(window);
+		paddleR->draw(window);
 		ball.draw(window);
-		paddleL.draw(window);
-		paddleR.draw(window);
 		window.display();
 	}
 

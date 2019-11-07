@@ -1,5 +1,6 @@
-#include<iostream>
-#include<cmath>
+#include <iostream>
+#include <cmath>
+#include <vector>
 #include "Setting.h"
 #include "Paddle.h"
 

@@ -1,15 +1,18 @@
-#include<iostream>
-#include<cmath>
+#include <iostream>
+#include <cmath>
+#include <vector>
 #include "Setting.h"
 #include "Ball.h"
+#include "Paddle.h"
 
-Ball::Ball(float pX, float pY)
+Ball::Ball(float pX, float pY, std::vector<Paddle*> paddles)
 {
 	this->position.x = pX;
 	this->position.y = pY;
 	this->speed = 0.3f;
-	this->angle = 60;
+	this->angle = 0;
 	this->radius = 10.0f;
+	this->paddles = paddles;
 }
 
 void Ball::update()
@@ -38,7 +41,30 @@ void Ball::checkCollision()
 	if (this->position.y - this->radius<0 || this->position.y + this->radius>WINDOW_HEIGHT) {
 		this->angle = -this->angle;
 	}
-	if (this->position.x - this->radius<0 || this->position.x + this->radius>WINDOW_WIDTH) {
-		this->angle = 180-this->angle;
+	if (this->position.x + this->radius<0 || this->position.x - this->radius>WINDOW_WIDTH) {
+		//this->angle = 180 - this->angle;
+		this->position.x = float(WINDOW_WIDTH / 2);
+		this->position.y = float(WINDOW_HEIGHT / 2);
+		this->speed = 0.3f;
+	}
+	//paddle
+	for (int i = 0; i < this->paddles.size(); i++) {
+		if (this->position.x + this->radius > this->paddles.at(i)->position.x - this->paddles.at(i)->width / 2 &&
+			this->position.x - this->radius < this->paddles.at(i)->position.x + this->paddles.at(i)->width / 2 &&
+			this->position.y + this->radius > this->paddles.at(i)->position.y - this->paddles.at(i)->height / 2 &&
+			this->position.y - this->radius < this->paddles.at(i)->position.y + this->paddles.at(i)->height / 2) {
+			float collideAngle = atan2f(this->position.y - this->paddles.at(i)->position.y, this->position.x - this->paddles.at(i)->position.x) * 180 / 3.14f;
+			float sideAngle = atan2f(this->radius + this->paddles.at(i)->height / 2, this->radius + this->paddles.at(i)->width / 2) * 180 / 3.14f;
+			if (!(abs(collideAngle) > sideAngle && abs(collideAngle) < (180.0f - sideAngle))) {
+				std::cout << collideAngle << " " << this->angle << std::endl;
+				this->angle = abs(collideAngle) * (this->angle >= 0 ? 1 : -1);
+				if (this->speed < 1.0f) {
+					this->speed += 0.02f;
+				}
+			}
+			else {
+				this->angle = -this->angle;
+			}
+		}
 	}
 }
