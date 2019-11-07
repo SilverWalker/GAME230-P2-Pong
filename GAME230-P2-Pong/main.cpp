@@ -17,8 +17,8 @@ int main()
 {
 	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "PONG");
 	std::vector<Paddle*> paddles;
-	Paddle* paddleL = new Paddle(20.0f, float(WINDOW_HEIGHT / 2));
-	Paddle* paddleR = new Paddle(float(WINDOW_WIDTH - 20), float(WINDOW_HEIGHT / 2));
+	Paddle* paddleL = new Paddle(20.0f, float(WINDOW_HEIGHT / 2), true);
+	Paddle* paddleR = new Paddle(float(WINDOW_WIDTH - 20), float(WINDOW_HEIGHT / 2), true);
 	paddles.push_back(paddleL);
 	paddles.push_back(paddleR);
 	Ball ball(float(WINDOW_WIDTH / 2), float(WINDOW_HEIGHT / 2), paddles);
@@ -31,27 +31,40 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-		}
+			if (event.type == sf::Event::EventType::KeyPressed) {
+				//switch between player mode and AI mode
+				if (event.key.code == sf::Keyboard::G) {
+					std::cout << "FK" << std::endl;
+					paddleL->aiMode = !paddleL->aiMode;
+				}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+				if (event.key.code == sf::Keyboard::H) {
+					paddleR->aiMode = !paddleR->aiMode;
+				}
+			}
+		}
+		//paddle move in player mode
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !paddleL->aiMode)
 		{
 			paddleL->moveUp();
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && !paddleL->aiMode)
 		{
 			paddleL->moveDown();
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !paddleR->aiMode)
 		{
 			paddleR->moveUp();
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !paddleR->aiMode)
 		{
 			paddleR->moveDown();
 		}
 
 		window.clear();
 		ball.update();
+		if (paddleL->aiMode) paddleL->aiMove(ball);
+		if (paddleR->aiMode) paddleR->aiMove(ball);
 		paddleL->draw(window);
 		paddleR->draw(window);
 		ball.draw(window);

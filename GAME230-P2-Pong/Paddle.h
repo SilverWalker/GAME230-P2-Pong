@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
+class Ball;
+
 class Paddle {
 public:
 	sf::Vector2f position;
@@ -9,11 +11,12 @@ public:
 	float width;
 	float height;
 	sf::RectangleShape shape;
+	bool aiMode;
 
-	Paddle(float pX, float pY);
+	Paddle(float pX, float pY, bool aiMode);
 	void update();
 	void draw(sf::RenderWindow& window);
-	void checkCollision();
 	void moveUp();
 	void moveDown();
+	void aiMove(Ball targetBall);
 };

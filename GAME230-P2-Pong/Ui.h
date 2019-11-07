@@ -7,6 +7,7 @@ public:
 	sf::Font font;
 	sf::Text p1ScoreText;
 	sf::Text p2ScoreText;
+	sf::RectangleShape lineShape;
 
 	Ui();
 	void update();

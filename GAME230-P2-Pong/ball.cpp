@@ -10,7 +10,7 @@ Ball::Ball(float pX, float pY, std::vector<Paddle*> paddles)
 	this->position.x = pX;
 	this->position.y = pY;
 	this->speed = 0.3f;
-	this->angle = 0;
+	this->angle = 45;
 	this->radius = 10.0f;
 	this->paddles = paddles;
 }
@@ -44,7 +44,7 @@ void Ball::checkCollision()
 	if (this->position.x + this->radius<0 || this->position.x - this->radius>WINDOW_WIDTH) {
 		//this->angle = 180 - this->angle;
 		this->position.x < WINDOW_WIDTH / 2 ? p2Score++ : p1Score++;
-		this->angle = this->position.x < WINDOW_WIDTH / 2 ? 180 : 0;
+		this->angle = this->position.x < WINDOW_WIDTH / 2 ? 180.0f : 0.0f;
 		this->position.x = float(WINDOW_WIDTH / 2);
 		this->position.y = float(WINDOW_HEIGHT / 2);
 		this->speed = 0.3f;

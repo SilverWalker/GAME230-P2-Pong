@@ -2,20 +2,21 @@
 #include <cmath>
 #include <vector>
 #include "Setting.h"
+#include "Ball.h"
 #include "Paddle.h"
 
-Paddle::Paddle(float pX, float pY)
+Paddle::Paddle(float pX, float pY, bool aiMode)
 {
 	this->position.x = pX;
 	this->position.y = pY;
 	this->speed = 0.3f;
 	this->width = 10;
 	this->height = 100;
+	this->aiMode = aiMode;
 }
 
 void Paddle::update()
 {
-	this->checkCollision();
 }
 
 void Paddle::draw(sf::RenderWindow& window)
@@ -26,10 +27,6 @@ void Paddle::draw(sf::RenderWindow& window)
 	shape.setFillColor(sf::Color::White);
 
 	window.draw(shape);
-}
-
-void Paddle::checkCollision()
-{
 }
 
 void Paddle::moveUp()
@@ -43,5 +40,16 @@ void Paddle::moveDown()
 {
 	if (this->position.y + this->height / 2 < WINDOW_HEIGHT) {
 		this->position.y += this->speed;
+	}
+}
+
+void Paddle::aiMove(Ball targetBall)
+{
+	if (abs(targetBall.position.x - this->position.x) < WINDOW_WIDTH / 1.5) {
+		if (targetBall.position.y < this->position.y - this->height / 4) this->moveUp();
+		if (targetBall.position.y > this->position.y + this->height / 4) this->moveDown();
+	}
+	else {
+		this->position.y > WINDOW_HEIGHT / 2 ? this->moveUp() : this->moveDown();
 	}
 }
