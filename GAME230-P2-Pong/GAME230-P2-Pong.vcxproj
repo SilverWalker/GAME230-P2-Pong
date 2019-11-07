@@ -163,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="GALS.ttf" />
+    <Font Include="JustMyType-KePl.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

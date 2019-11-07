@@ -55,6 +55,7 @@ int main()
 		paddleL->draw(window);
 		paddleR->draw(window);
 		ball.draw(window);
+		ui.update();
 		ui.draw(window);
 		window.display();
 	}

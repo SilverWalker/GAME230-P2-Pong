@@ -43,6 +43,8 @@ void Ball::checkCollision()
 	}
 	if (this->position.x + this->radius<0 || this->position.x - this->radius>WINDOW_WIDTH) {
 		//this->angle = 180 - this->angle;
+		this->position.x < WINDOW_WIDTH / 2 ? p2Score++ : p1Score++;
+		std::cout << p1Score << " " << p2Score << std::endl;
 		this->position.x = float(WINDOW_WIDTH / 2);
 		this->position.y = float(WINDOW_HEIGHT / 2);
 		this->speed = 0.3f;
