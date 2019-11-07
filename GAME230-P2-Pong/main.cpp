@@ -11,6 +11,7 @@
 #include "Setting.h"
 #include "Ball.h"
 #include "Paddle.h"
+#include "Ui.h"
 
 int main()
 {
@@ -21,6 +22,7 @@ int main()
 	paddles.push_back(paddleL);
 	paddles.push_back(paddleR);
 	Ball ball(float(WINDOW_WIDTH / 2), float(WINDOW_HEIGHT / 2), paddles);
+	Ui ui;
 
 	while (window.isOpen())
 	{
@@ -53,6 +55,7 @@ int main()
 		paddleL->draw(window);
 		paddleR->draw(window);
 		ball.draw(window);
+		ui.draw(window);
 		window.display();
 	}
 
