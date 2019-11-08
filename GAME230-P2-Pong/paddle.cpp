@@ -9,7 +9,7 @@ Paddle::Paddle(float pX, float pY, bool aiMode)
 {
 	this->position.x = pX;
 	this->position.y = pY;
-	this->speed = 0.3f;
+	this->speed = 1.0f;
 	this->width = 10;
 	this->height = 100;
 	this->aiMode = aiMode;
