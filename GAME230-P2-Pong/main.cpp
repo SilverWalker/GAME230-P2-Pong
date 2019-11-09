@@ -26,6 +26,7 @@ int main()
 
 	while (window.isOpen())
 	{
+		dt = deltaClock.restart();
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -34,7 +35,6 @@ int main()
 			if (event.type == sf::Event::EventType::KeyPressed) {
 				//switch between player mode and AI mode
 				if (event.key.code == sf::Keyboard::G) {
-					std::cout << "FK" << std::endl;
 					paddleL->aiMode = !paddleL->aiMode;
 				}
 

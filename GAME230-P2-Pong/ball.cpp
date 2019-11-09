@@ -9,7 +9,7 @@ Ball::Ball(float pX, float pY, std::vector<Paddle*> paddles)
 {
 	this->position.x = pX;
 	this->position.y = pY;
-	this->speed = 0.5f;
+	this->speed = 300.0f;
 	this->angle = 45;
 	this->radius = 10.0f;
 	this->paddles = paddles;
@@ -20,8 +20,8 @@ void Ball::update()
 	this->velocity.x = this->speed * cosf(this->angle * 3.14f / 180);
 	this->velocity.y = this->speed * sinf(this->angle * 3.14f / 180);
 	//std::cout << this->angle << std::endl;
-	this->position.x += this->velocity.x;
-	this->position.y += this->velocity.y;
+	this->position.x += this->velocity.x * dt.asSeconds();
+	this->position.y += this->velocity.y * dt.asSeconds();
 	this->checkCollision();
 }
 
@@ -40,6 +40,7 @@ void Ball::checkCollision()
 	//screen
 	if (this->position.y - this->radius<0 || this->position.y + this->radius>WINDOW_HEIGHT) {
 		this->angle = -this->angle;
+		this->position.y += this->position.y - this->radius < 0 ? 0.1f : -0.1f;
 	}
 	if (this->position.x + this->radius<0 || this->position.x - this->radius>WINDOW_WIDTH) {
 		//this->angle = 180 - this->angle;
@@ -47,7 +48,7 @@ void Ball::checkCollision()
 		this->angle = this->position.x < WINDOW_WIDTH / 2 ? 180.0f : 0.0f;
 		this->position.x = float(WINDOW_WIDTH / 2);
 		this->position.y = float(WINDOW_HEIGHT / 2);
-		this->speed = 0.5f;
+		this->speed = 300.0f;
 	}
 	//paddle
 	for (int i = 0; i < this->paddles.size(); i++) {
@@ -59,10 +60,10 @@ void Ball::checkCollision()
 			float sideAngle = atan2f(this->radius + this->paddles.at(i)->height / 2, this->radius + this->paddles.at(i)->width / 2) * 180 / 3.14f;
 			if (!(abs(collideAngle) > sideAngle && abs(collideAngle) < (180.0f - sideAngle))) {
 				this->angle = abs(collideAngle) * (this->angle >= 0 ? 1 : -1);
-				if (this->speed < 2.0f) {
-					this->speed += 0.1f;
+				//if (this->speed < 2000.0f) {
+					this->speed += 50.f;
 					std::cout << this->speed << std::endl;
-				}
+				//}
 			}
 			else {
 				this->angle = -this->angle;

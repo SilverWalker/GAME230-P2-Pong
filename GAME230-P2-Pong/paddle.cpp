@@ -9,7 +9,7 @@ Paddle::Paddle(float pX, float pY, bool aiMode)
 {
 	this->position.x = pX;
 	this->position.y = pY;
-	this->speed = 1.0f;
+	this->speed = 800.0f;
 	this->width = 10;
 	this->height = 100;
 	this->aiMode = aiMode;
@@ -32,14 +32,14 @@ void Paddle::draw(sf::RenderWindow& window)
 void Paddle::moveUp()
 {
 	if (this->position.y - this->height / 2 > 0) {
-		this->position.y -= this->speed;
+		this->position.y -= this->speed * dt.asSeconds();
 	}
 }
 
 void Paddle::moveDown()
 {
 	if (this->position.y + this->height / 2 < WINDOW_HEIGHT) {
-		this->position.y += this->speed;
+		this->position.y += this->speed * dt.asSeconds();
 	}
 }
 
