@@ -5,14 +5,13 @@
 #include "Ball.h"
 #include "Paddle.h"
 
-Ball::Ball(float pX, float pY, std::vector<Paddle*> paddles)
+Ball::Ball(float pX, float pY)
 {
 	this->position.x = pX;
 	this->position.y = pY;
 	this->speed = 300.0f;
 	this->angle = 45;
 	this->radius = 10.0f;
-	this->paddles = paddles;
 }
 
 void Ball::update()
@@ -43,21 +42,21 @@ void Ball::checkCollision()
 		this->position.y += this->position.y - this->radius < 0 ? 0.1f : -0.1f;
 	}
 	if (this->position.x + this->radius<0 || this->position.x - this->radius>WINDOW_WIDTH) {
-		//this->angle = 180 - this->angle;
 		this->position.x < WINDOW_WIDTH / 2 ? p2Score++ : p1Score++;
+		checkGameOver();
 		this->angle = this->position.x < WINDOW_WIDTH / 2 ? 180.0f : 0.0f;
 		this->position.x = float(WINDOW_WIDTH / 2);
 		this->position.y = float(WINDOW_HEIGHT / 2);
 		this->speed = 300.0f;
 	}
 	//paddle
-	for (int i = 0; i < this->paddles.size(); i++) {
-		if (this->position.x + this->radius > this->paddles.at(i)->position.x - this->paddles.at(i)->width / 2 &&
-			this->position.x - this->radius < this->paddles.at(i)->position.x + this->paddles.at(i)->width / 2 &&
-			this->position.y + this->radius > this->paddles.at(i)->position.y - this->paddles.at(i)->height / 2 &&
-			this->position.y - this->radius < this->paddles.at(i)->position.y + this->paddles.at(i)->height / 2) {
-			float collideAngle = atan2f(this->position.y - this->paddles.at(i)->position.y, this->position.x - this->paddles.at(i)->position.x) * 180 / 3.14f;
-			float sideAngle = atan2f(this->radius + this->paddles.at(i)->height / 2, this->radius + this->paddles.at(i)->width / 2) * 180 / 3.14f;
+	for (int i = 0; i < paddles.size(); i++) {
+		if (this->position.x + this->radius > paddles.at(i)->position.x - paddles.at(i)->width / 2 &&
+			this->position.x - this->radius < paddles.at(i)->position.x + paddles.at(i)->width / 2 &&
+			this->position.y + this->radius > paddles.at(i)->position.y - paddles.at(i)->height / 2 &&
+			this->position.y - this->radius < paddles.at(i)->position.y + paddles.at(i)->height / 2) {
+			float collideAngle = atan2f(this->position.y - paddles.at(i)->position.y, this->position.x - paddles.at(i)->position.x) * 180 / 3.14f;
+			float sideAngle = atan2f(this->radius + paddles.at(i)->height / 2, this->radius + paddles.at(i)->width / 2) * 180 / 3.14f;
 			if (!(abs(collideAngle) > sideAngle && abs(collideAngle) < (180.0f - sideAngle))) {
 				this->angle = abs(collideAngle) * (this->angle >= 0 ? 1 : -1);
 				//if (this->speed < 2000.0f) {

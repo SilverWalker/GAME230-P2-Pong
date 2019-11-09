@@ -23,6 +23,20 @@ Ui::Ui()
 	this->lineShape.setSize(sf::Vector2f( 10, WINDOW_HEIGHT / 25 ));
 	this->lineShape.setOrigin(5, WINDOW_HEIGHT / 50);
 	this->lineShape.setFillColor(sf::Color::White);
+
+	this->gameOverText.setFont(this->font);
+	this->gameOverText.setString("Game Over!");
+	this->gameOverText.setCharacterSize(WINDOW_WIDTH / 12);
+	this->gameOverText.setFillColor(sf::Color::White);
+	sf::FloatRect gameOverBounds = this->gameOverText.getLocalBounds();
+	this->gameOverText.setPosition(sf::Vector2f(WINDOW_WIDTH * 0.5 - gameOverBounds.width / 2, WINDOW_HEIGHT * 0.4));
+
+	this->restartText.setFont(this->font);
+	this->restartText.setString("Press spacebar to restart game");
+	this->restartText.setCharacterSize(WINDOW_WIDTH / 24);
+	this->restartText.setFillColor(sf::Color::White);
+	sf::FloatRect restartBounds = this->restartText.getLocalBounds();
+	this->restartText.setPosition(sf::Vector2f(WINDOW_WIDTH * 0.5 - restartBounds.width / 2, WINDOW_HEIGHT * 0.55));
 }
 
 void Ui::update()
@@ -35,8 +49,14 @@ void Ui::draw(sf::RenderWindow& window)
 {
 	window.draw(this->p1ScoreText);
 	window.draw(this->p2ScoreText);
-	for (int i = 1; i < 25; i += 2) {
-		this->lineShape.setPosition(WINDOW_WIDTH / 2, i * WINDOW_HEIGHT / 25 + WINDOW_HEIGHT / 50);
-		window.draw(this->lineShape);
+	if (!isGameOver) {
+		for (int i = 1; i < 25; i += 2) {
+			this->lineShape.setPosition(WINDOW_WIDTH / 2, i * WINDOW_HEIGHT / 25 + WINDOW_HEIGHT / 50);
+			window.draw(this->lineShape);
+		}
+	}
+	else {
+		window.draw(this->gameOverText);
+		window.draw(this->restartText);
 	}
 }

@@ -8,6 +8,8 @@ public:
 	sf::Text p1ScoreText;
 	sf::Text p2ScoreText;
 	sf::RectangleShape lineShape;
+	sf::Text gameOverText;
+	sf::Text restartText;
 
 	Ui();
 	void update();
