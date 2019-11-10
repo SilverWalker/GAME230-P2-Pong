@@ -32,7 +32,7 @@ Ui::Ui()
 	this->lineShape.setFillColor(sf::Color::White);
 
 	this->gameOverText.setFont(this->font);
-	this->gameOverText.setString("Game Over!");
+	this->gameOverText.setString(p1Score >= p2Score ? "Player 1 Wins!" : "Player 2 Wins!");
 	this->gameOverText.setCharacterSize(WINDOW_WIDTH / 12);
 	this->gameOverText.setFillColor(sf::Color::White);
 	sf::FloatRect gameOverBounds = this->gameOverText.getLocalBounds();
@@ -73,6 +73,7 @@ void Ui::drawScore(sf::RenderWindow& window)
 
 void Ui::drawGameOver(sf::RenderWindow& window)
 {
+	this->gameOverText.setString(p1Score >= p2Score ? "Player 1 Wins!" : "Player 2 Wins!");
 	window.draw(this->gameOverText);
 	window.draw(this->restartText);
 }
