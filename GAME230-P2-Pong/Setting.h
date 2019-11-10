@@ -1,5 +1,7 @@
 #pragma once
 #include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
+#include <iostream>
 #include "Paddle.h"
 
 extern int WINDOW_WIDTH;
@@ -21,5 +23,11 @@ extern sf::Color p2Color;
 extern sf::Color p1OutlineColor;
 extern sf::Color p2OutlineColor;
 
+extern sf::SoundBuffer bouncePaddleBuffer;
+extern sf::SoundBuffer bounceWallBuffer;
+extern sf::Sound sound;
+
 extern void checkGameOver();
 extern void resetGame();
+extern void loadSounds();
+extern void playSound(int soundId);

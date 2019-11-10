@@ -20,6 +20,10 @@ sf::Color p2OutlineColor(244, 208, 63, 255);
 sf::Clock deltaClock;
 sf::Time dt;
 
+sf::SoundBuffer bouncePaddleBuffer;
+sf::SoundBuffer bounceWallBuffer;
+sf::Sound sound;
+
 void checkGameOver() {
 	if (p1Score >= winReqirement || p2Score >= winReqirement) {
 		isGameOver = true;
@@ -33,4 +37,21 @@ void resetGame() {
 		paddles.at(i)->position.y = WINDOW_HEIGHT / 2;
 	}
 	isGameOver = false;
+}
+
+void loadSounds() {
+	bouncePaddleBuffer.loadFromFile("bouncePaddle.wav");
+	bounceWallBuffer.loadFromFile("bounceWall.wav");
+}
+
+void playSound(int soundId) {
+	switch (soundId) {
+	case 0:
+		sound.setBuffer(bouncePaddleBuffer);
+		break;
+	case 1:
+		sound.setBuffer(bounceWallBuffer);
+		break;
+	}
+	sound.play();
 }

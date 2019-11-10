@@ -55,4 +55,12 @@
       <Filter>Source Files</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="bouncePaddle.wav">
+      <Filter>Source Files</Filter>
+    </Media>
+    <Media Include="bounceWall.wav">
+      <Filter>Source Files</Filter>
+    </Media>
+  </ItemGroup>
 </Project>

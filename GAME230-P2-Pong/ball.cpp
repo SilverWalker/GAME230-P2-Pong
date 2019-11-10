@@ -43,6 +43,7 @@ void Ball::checkCollision()
 	if (this->position.y - this->radius<0 || this->position.y + this->radius>WINDOW_HEIGHT) {
 		this->angle = -this->angle;
 		this->position.y += this->position.y - this->radius < 0 ? 0.1f : -0.1f;
+		playSound(1);
 	}
 	if (this->position.x + this->radius<0 || this->position.x - this->radius>WINDOW_WIDTH) {
 		this->position.x < WINDOW_WIDTH / 2 ? p2Score++ : p1Score++;
@@ -66,12 +67,13 @@ void Ball::checkCollision()
 				//if (this->speed < 2000.0f) {
 					this->speed += 50.f;
 					this->color = paddles.at(i)->outlineColor;
-					std::cout << this->speed << std::endl;
+					//std::cout << this->speed << std::endl;
 				//}
 			}
 			else {
 				this->angle = -this->angle;
 			}
+			playSound(0);
 		}
 	}
 }

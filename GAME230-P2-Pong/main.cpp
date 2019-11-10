@@ -16,13 +16,13 @@
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "PONG");
+	loadSounds();
 	Paddle* paddleL = new Paddle(20.0f, float(WINDOW_HEIGHT / 2), false, p1Color, p1OutlineColor);
 	Paddle* paddleR = new Paddle(float(WINDOW_WIDTH - 20), float(WINDOW_HEIGHT / 2), true, p2Color, p2OutlineColor);
 	paddles.push_back(paddleL);
 	paddles.push_back(paddleR);
 	Ball ball(float(WINDOW_WIDTH / 2), float(WINDOW_HEIGHT / 2));
 	Ui ui;
-
 	while (window.isOpen())
 	{
 		dt = deltaClock.restart();
