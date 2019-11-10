@@ -17,5 +17,7 @@ public:
 	Ui();
 	void update();
 	void drawBg(sf::RenderWindow& window);
-	void draw(sf::RenderWindow& window);
+	void drawLine(sf::RenderWindow& window);
+	void drawScore(sf::RenderWindow& window);
+	void drawGameOver(sf::RenderWindow& window);
 };

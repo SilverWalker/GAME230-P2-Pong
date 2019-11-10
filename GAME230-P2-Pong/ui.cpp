@@ -57,18 +57,22 @@ void Ui::drawBg(sf::RenderWindow& window)
 	window.draw(this->bgShape);
 }
 
-void Ui::draw(sf::RenderWindow& window)
+void Ui::drawLine(sf::RenderWindow& window)
+{
+	for (int i = 1; i < 25; i += 2) {
+		this->lineShape.setPosition(WINDOW_WIDTH / 2, i * WINDOW_HEIGHT / 25 + WINDOW_HEIGHT / 50);
+		window.draw(this->lineShape);
+	}
+}
+
+void Ui::drawScore(sf::RenderWindow& window)
 {
 	window.draw(this->p1ScoreText);
 	window.draw(this->p2ScoreText);
-	if (!isGameOver) {
-		for (int i = 1; i < 25; i += 2) {
-			this->lineShape.setPosition(WINDOW_WIDTH / 2, i * WINDOW_HEIGHT / 25 + WINDOW_HEIGHT / 50);
-			window.draw(this->lineShape);
-		}
-	}
-	else {
-		window.draw(this->gameOverText);
-		window.draw(this->restartText);
-	}
+}
+
+void Ui::drawGameOver(sf::RenderWindow& window)
+{
+	window.draw(this->gameOverText);
+	window.draw(this->restartText);
 }

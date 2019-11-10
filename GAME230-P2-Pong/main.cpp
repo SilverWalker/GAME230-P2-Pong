@@ -69,12 +69,16 @@ int main()
 			ball.update();
 			if (paddleL->aiMode) paddleL->aiMove(ball);
 			if (paddleR->aiMode) paddleR->aiMove(ball);
+			ui.drawLine(window);
 			paddleL->draw(window);
 			paddleR->draw(window);
 			ball.draw(window);
 		}
+		else {
+			ui.drawGameOver(window);
+		}
 		ui.update();
-		ui.draw(window);
+		ui.drawScore(window);
 		window.display();
 	}
 
