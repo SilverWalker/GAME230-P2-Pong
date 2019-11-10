@@ -13,6 +13,16 @@ Ball::Ball(float pX, float pY)
 	this->angle = 45;
 	this->radius = 10.0f;
 	this->color = sf::Color(255, 255, 255);
+	for (int i = 0; i < 50; i++) {
+		this->trails.push_back(sf::Vector2f(this->position.x, this->position.y));
+	}
+
+	this->shape.setRadius(this->radius);
+	this->shape.setOrigin(this->radius, this->radius);
+	this->shape.setOutlineThickness(3);
+
+	//this->trailShape.setOutlineThickness(3);
+	//this->trailShape.setOutlineColor(sf::Color(255, 255, 255, 100));
 }
 
 void Ball::update()
@@ -23,18 +33,25 @@ void Ball::update()
 	this->position.x += this->velocity.x * dt.asSeconds();
 	this->position.y += this->velocity.y * dt.asSeconds();
 	this->checkCollision();
+
+	this->trails.erase(this->trails.begin());
+	this->trails.push_back(sf::Vector2f(this->position.x, this->position.y));
 }
 
 void Ball::draw(sf::RenderWindow& window)
 {
-	shape.setRadius(this->radius);
-	shape.setOrigin(this->radius, this->radius);
-	shape.setPosition(this->position.x, this->position.y);
-	shape.setFillColor(this->color);
-	shape.setOutlineColor(sf::Color::White);
-	shape.setOutlineThickness(3);
-
-	window.draw(shape);
+	this->shape.setPosition(this->position.x, this->position.y);
+	this->shape.setFillColor(this->color);
+	this->shape.setOutlineColor(sf::Color::White);
+	
+	for (int i = 0; i < this->trails.size(); i+=5) {
+		this->trailShape.setRadius(this->radius * i / this->trails.size());
+		this->trailShape.setOrigin(this->radius *i / this->trails.size(), this->radius * i / this->trails.size());
+		this->trailShape.setPosition(this->trails.at(i));
+		this->trailShape.setFillColor(this->color);
+		window.draw(this->trailShape);
+	}
+	window.draw(this->shape);
 }
 
 void Ball::checkCollision()

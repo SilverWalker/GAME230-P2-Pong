@@ -11,6 +11,8 @@ public:
 	float radius;
 	sf::CircleShape shape;
 	sf::Color color;
+	std::vector<sf::Vector2f> trails;
+	sf::CircleShape trailShape;
 
 	Ball(float pX, float pY);
 	void update();
