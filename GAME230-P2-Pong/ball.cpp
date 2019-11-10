@@ -12,6 +12,7 @@ Ball::Ball(float pX, float pY)
 	this->speed = 300.0f;
 	this->angle = 45;
 	this->radius = 10.0f;
+	this->color = sf::Color(255, 255, 255);
 }
 
 void Ball::update()
@@ -29,7 +30,7 @@ void Ball::draw(sf::RenderWindow& window)
 	shape.setRadius(this->radius);
 	shape.setOrigin(this->radius, this->radius);
 	shape.setPosition(this->position.x, this->position.y);
-	shape.setFillColor(sf::Color::White);
+	shape.setFillColor(this->color);
 
 	window.draw(shape);
 }
@@ -48,6 +49,7 @@ void Ball::checkCollision()
 		this->position.x = float(WINDOW_WIDTH / 2);
 		this->position.y = float(WINDOW_HEIGHT / 2);
 		this->speed = 300.0f;
+		this->color = sf::Color(255, 255, 255);
 	}
 	//paddle
 	for (int i = 0; i < paddles.size(); i++) {
@@ -61,6 +63,7 @@ void Ball::checkCollision()
 				this->angle = abs(collideAngle) * (this->angle >= 0 ? 1 : -1);
 				//if (this->speed < 2000.0f) {
 					this->speed += 50.f;
+					this->color = paddles.at(i)->outlineColor;
 					std::cout << this->speed << std::endl;
 				//}
 			}

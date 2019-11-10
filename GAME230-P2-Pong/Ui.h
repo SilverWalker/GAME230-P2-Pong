@@ -11,7 +11,11 @@ public:
 	sf::Text gameOverText;
 	sf::Text restartText;
 
+	sf::Texture bgTexture;
+	sf::RectangleShape bgShape;
+
 	Ui();
 	void update();
+	void drawBg(sf::RenderWindow& window);
 	void draw(sf::RenderWindow& window);
 };

@@ -5,7 +5,7 @@
 #include "Ball.h"
 #include "Paddle.h"
 
-Paddle::Paddle(float pX, float pY, bool aiMode)
+Paddle::Paddle(float pX, float pY, bool aiMode, sf::Color color, sf::Color outlineColor)
 {
 	this->position.x = pX;
 	this->position.y = pY;
@@ -13,6 +13,8 @@ Paddle::Paddle(float pX, float pY, bool aiMode)
 	this->width = 10;
 	this->height = 100;
 	this->aiMode = aiMode;
+	this->color = color;
+	this->outlineColor = outlineColor;
 }
 
 void Paddle::update()
@@ -24,8 +26,9 @@ void Paddle::draw(sf::RenderWindow& window)
 	shape.setSize({ this->width, this->height });
 	shape.setOrigin(this->width/2, this->height/2);
 	shape.setPosition(this->position.x, this->position.y);
-	shape.setFillColor(sf::Color::White);
-
+	shape.setFillColor(this->color);
+	shape.setOutlineColor(this->outlineColor);
+	shape.setOutlineThickness(3);
 	window.draw(shape);
 }
 

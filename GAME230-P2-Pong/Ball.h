@@ -10,6 +10,7 @@ public:
 	float angle;
 	float radius;
 	sf::CircleShape shape;
+	sf::Color color;
 
 	Ball(float pX, float pY);
 	void update();

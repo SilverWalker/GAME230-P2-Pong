@@ -50,4 +50,9 @@
       <Filter>Source Files</Filter>
     </Font>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="bg.png">
+      <Filter>Source Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

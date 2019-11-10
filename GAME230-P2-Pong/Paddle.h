@@ -12,8 +12,10 @@ public:
 	float height;
 	sf::RectangleShape shape;
 	bool aiMode;
+	sf::Color color;
+	sf::Color outlineColor;
 
-	Paddle(float pX, float pY, bool aiMode);
+	Paddle(float pX, float pY, bool aiMode, sf::Color color, sf::Color outlineColor);
 	void update();
 	void draw(sf::RenderWindow& window);
 	void moveUp();

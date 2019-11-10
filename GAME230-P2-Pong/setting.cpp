@@ -12,6 +12,11 @@ int winReqirement = 5;
 
 std::vector<Paddle*> paddles;
 
+sf::Color p1Color(165, 105, 189, 100);
+sf::Color p2Color(244, 208, 63, 100);
+sf::Color p1OutlineColor(165, 105, 189, 255);
+sf::Color p2OutlineColor(244, 208, 63, 255);
+
 sf::Clock deltaClock;
 sf::Time dt;
 

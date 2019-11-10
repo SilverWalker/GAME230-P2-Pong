@@ -6,6 +6,13 @@
 Ui::Ui()
 {
 	this->font.loadFromFile("JustMyType-KePl.ttf");
+	this->bgTexture.loadFromFile("bg.png");
+
+
+	this->bgShape.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
+	this->bgShape.setPosition(0, 0);
+	this->bgShape.setTexture(&this->bgTexture);
+
 	this->p1ScoreText.setFont(this->font);
 	this->p1ScoreText.setString(std::to_string(p1Score));
 	this->p1ScoreText.setCharacterSize(WINDOW_WIDTH/12);	
@@ -43,6 +50,11 @@ void Ui::update()
 {
 	this->p1ScoreText.setString(std::to_string(p1Score));
 	this->p2ScoreText.setString(std::to_string(p2Score));
+}
+
+void Ui::drawBg(sf::RenderWindow& window)
+{
+	window.draw(this->bgShape);
 }
 
 void Ui::draw(sf::RenderWindow& window)

@@ -16,5 +16,10 @@ extern sf::Time dt;
 
 extern std::vector<Paddle*> paddles;
 
+extern sf::Color p1Color;
+extern sf::Color p2Color;
+extern sf::Color p1OutlineColor;
+extern sf::Color p2OutlineColor;
+
 extern void checkGameOver();
 extern void resetGame();
