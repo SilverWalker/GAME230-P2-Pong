@@ -31,6 +31,8 @@ void Ball::draw(sf::RenderWindow& window)
 	shape.setOrigin(this->radius, this->radius);
 	shape.setPosition(this->position.x, this->position.y);
 	shape.setFillColor(this->color);
+	shape.setOutlineColor(sf::Color::White);
+	shape.setOutlineThickness(3);
 
 	window.draw(shape);
 }
