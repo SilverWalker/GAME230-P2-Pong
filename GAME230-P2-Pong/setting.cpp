@@ -27,6 +27,7 @@ sf::SoundBuffer bouncePaddleBuffer;
 sf::SoundBuffer bounceWallBuffer;
 sf::SoundBuffer powerupBuffer;
 sf::SoundBuffer failBuffer;
+sf::SoundBuffer winBuffer;
 sf::Sound sound;;
 sf::Sound pupSound;
 
@@ -35,6 +36,7 @@ sf::Font font;
 void checkGameOver() {
 	if (p1Score >= winReqirement || p2Score >= winReqirement) {
 		isGameOver = true;
+		playSound(4);
 	}
 }
 
@@ -54,6 +56,7 @@ void loadAssets() {
 	bounceWallBuffer.loadFromFile("bounceWall.wav");
 	powerupBuffer.loadFromFile("powerup.wav");
 	failBuffer.loadFromFile("fail.wav");
+	winBuffer.loadFromFile("win.wav");
 	font.loadFromFile("JustMyType-KePl.ttf");
 }
 
@@ -73,6 +76,10 @@ void playSound(int soundId) {
 		break;
 	case 3:
 		sound.setBuffer(failBuffer);
+		sound.play();
+		break;
+	case 4:
+		sound.setBuffer(winBuffer);
 		sound.play();
 		break;
 	}

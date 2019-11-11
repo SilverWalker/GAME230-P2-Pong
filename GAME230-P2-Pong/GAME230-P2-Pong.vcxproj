@@ -176,6 +176,7 @@
     <Media Include="bounceWall.wav" />
     <Media Include="fail.wav" />
     <Media Include="powerup.wav" />
+    <Media Include="win.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

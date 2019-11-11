@@ -32,6 +32,7 @@ extern sf::SoundBuffer bouncePaddleBuffer;
 extern sf::SoundBuffer bounceWallBuffer;
 extern sf::SoundBuffer powerupBuffer;
 extern sf::SoundBuffer failBuffer;
+extern sf::SoundBuffer winBuffer;
 extern sf::Sound sound;
 extern sf::Sound pupSound;
 

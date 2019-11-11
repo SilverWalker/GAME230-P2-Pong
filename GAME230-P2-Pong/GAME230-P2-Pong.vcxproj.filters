@@ -80,5 +80,8 @@
     <Media Include="powerup.wav">
       <Filter>Source Files</Filter>
     </Media>
+    <Media Include="win.wav">
+      <Filter>Source Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>
