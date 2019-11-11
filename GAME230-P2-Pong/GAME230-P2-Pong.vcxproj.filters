@@ -74,5 +74,11 @@
     <Media Include="bounceWall.wav">
       <Filter>Source Files</Filter>
     </Media>
+    <Media Include="fail.wav">
+      <Filter>Source Files</Filter>
+    </Media>
+    <Media Include="powerup.wav">
+      <Filter>Source Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

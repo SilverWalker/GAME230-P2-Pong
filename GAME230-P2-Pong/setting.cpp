@@ -25,7 +25,10 @@ int frameCount = 0;
 
 sf::SoundBuffer bouncePaddleBuffer;
 sf::SoundBuffer bounceWallBuffer;
-sf::Sound sound;
+sf::SoundBuffer powerupBuffer;
+sf::SoundBuffer failBuffer;
+sf::Sound sound;;
+sf::Sound pupSound;
 
 sf::Font font;
 
@@ -49,7 +52,8 @@ void resetGame() {
 void loadAssets() {
 	bouncePaddleBuffer.loadFromFile("bouncePaddle.wav");
 	bounceWallBuffer.loadFromFile("bounceWall.wav");
-
+	powerupBuffer.loadFromFile("powerup.wav");
+	failBuffer.loadFromFile("fail.wav");
 	font.loadFromFile("JustMyType-KePl.ttf");
 }
 
@@ -57,10 +61,19 @@ void playSound(int soundId) {
 	switch (soundId) {
 	case 0:
 		sound.setBuffer(bouncePaddleBuffer);
+		sound.play();
 		break;
 	case 1:
 		sound.setBuffer(bounceWallBuffer);
+		sound.play();
+		break;
+	case 2:
+		pupSound.setBuffer(powerupBuffer);
+		pupSound.play();
+		break;
+	case 3:
+		sound.setBuffer(failBuffer);
+		sound.play();
 		break;
 	}
-	sound.play();
 }

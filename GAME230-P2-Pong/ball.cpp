@@ -66,6 +66,7 @@ void Ball::checkCollision()
 	}
 	if (this->position.x + this->radius<0 || this->position.x - this->radius>WINDOW_WIDTH) {
 		this->position.x < WINDOW_WIDTH / 2 ? p2Score++ : p1Score++;
+		playSound(3);
 		checkGameOver();
 		this->angle = this->position.x < WINDOW_WIDTH / 2 ? 180.0f : 0.0f;
 		this->position.x = float(WINDOW_WIDTH / 2);
@@ -112,6 +113,7 @@ void Ball::checkCollision()
 			else {
 				paddles.at(1)->upgrade(powerups.at(i)->upType);
 			}
+			playSound(2);
 			powerups.erase(powerups.begin()+i);
 		}
 	}
