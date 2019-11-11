@@ -21,9 +21,12 @@ void Powerup::draw(sf::RenderWindow& window)
 	shape.setSize({ this->width, this->height });
 	shape.setOrigin(this->width / 2, this->height / 2);
 	shape.setPosition(this->position.x, this->position.y);
+	shape.setRotation(frameCount*0.1);
 	shape.setFillColor(this->color);
 	shape.setOutlineColor(this->outlineColor);
 	shape.setOutlineThickness(3);
+	window.draw(shape);
+	shape.setRotation(-frameCount * 0.1);
 	window.draw(shape);
 
 	sf::Text pupText;

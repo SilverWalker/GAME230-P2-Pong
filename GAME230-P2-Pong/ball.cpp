@@ -115,4 +115,12 @@ void Ball::checkCollision()
 			powerups.erase(powerups.begin()+i);
 		}
 	}
+	//blackhole
+	if (this->position.x + this->radius > blackhole->position.x - blackhole->radius / 2 &&
+		this->position.x - this->radius < blackhole->position.x + blackhole->radius / 2 &&
+		this->position.y + this->radius > blackhole->position.y - blackhole->radius / 2 &&
+		this->position.y - this->radius < blackhole->position.y + blackhole->radius / 2) {
+		float collideAngle = atan2f(this->position.y - blackhole->position.y, this->position.x - blackhole->position.x) * 180 / 3.14f;
+		this->angle += collideAngle * 0.01;
+	}
 }

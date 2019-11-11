@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Paddle.h"
 #include "Powerup.h"
+#include "Blackhole.h"
 
 extern int WINDOW_WIDTH;
 extern int WINDOW_HEIGHT;
@@ -20,6 +21,7 @@ extern int frameCount;
 
 extern std::vector<Paddle*> paddles;
 extern std::vector<Powerup*> powerups;
+extern Blackhole* blackhole;
 
 extern sf::Color p1Color;
 extern sf::Color p2Color;

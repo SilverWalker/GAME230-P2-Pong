@@ -15,6 +15,7 @@
 #include "Paddle.h"
 #include "Ui.h"
 #include "Powerup.h"
+#include "Blackhole.h"
 
 int main()
 {
@@ -80,10 +81,11 @@ int main()
 			ball.update();
 			if (paddleL->aiMode) paddleL->aiMove(ball);
 			if (paddleR->aiMode) paddleR->aiMove(ball);
-			ui.drawLine(window);
 			paddleL->draw(window);
 			paddleR->draw(window);
+			blackhole->draw(window);
 			ball.draw(window);
+			ui.drawLine(window);
 			for (int i = 0; i < powerups.size(); i++) {
 				powerups.at(i)->draw(window);
 			}

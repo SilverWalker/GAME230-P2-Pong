@@ -12,6 +12,7 @@ int winReqirement = 5;
 
 std::vector<Paddle*> paddles;
 std::vector<Powerup*> powerups;
+Blackhole* blackhole = new Blackhole(float(WINDOW_WIDTH / 2), float(WINDOW_HEIGHT / 2));
 
 sf::Color p1Color(165, 105, 189, 100);
 sf::Color p2Color(244, 208, 63, 100);
