@@ -72,6 +72,10 @@ void Ball::checkCollision()
 		this->position.y = float(WINDOW_HEIGHT / 2);
 		this->speed = 300.0f;
 		this->color = sf::Color(255, 255, 255);
+		powerups.clear();
+		for (int i = 0; i < paddles.size(); i++) {
+			paddles.at(i)->reset();
+		}
 		frameCount = 0;
 	}
 	//paddle
@@ -94,6 +98,21 @@ void Ball::checkCollision()
 				this->angle = -this->angle;
 			}
 			playSound(0);
+		}
+	}
+	//powerup
+	for (int i = 0; i < powerups.size(); i++) {
+		if (this->position.x + this->radius > powerups.at(i)->position.x - powerups.at(i)->width / 2 &&
+			this->position.x - this->radius < powerups.at(i)->position.x + powerups.at(i)->width / 2 &&
+			this->position.y + this->radius > powerups.at(i)->position.y - powerups.at(i)->height / 2 &&
+			this->position.y - this->radius < powerups.at(i)->position.y + powerups.at(i)->height / 2) {
+			if (this->color.r == p1OutlineColor.r) {
+				paddles.at(0)->upgrade(powerups.at(i)->upType);
+			}
+			else {
+				paddles.at(1)->upgrade(powerups.at(i)->upType);
+			}
+			powerups.erase(powerups.begin()+i);
 		}
 	}
 }

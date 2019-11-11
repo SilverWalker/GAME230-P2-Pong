@@ -152,12 +152,14 @@
     <ClCompile Include="ball.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="paddle.cpp" />
+    <ClCompile Include="powerup.cpp" />
     <ClCompile Include="setting.cpp" />
     <ClCompile Include="ui.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Paddle.h" />
+    <ClInclude Include="Powerup.h" />
     <ClInclude Include="Setting.h" />
     <ClInclude Include="Ui.h" />
   </ItemGroup>

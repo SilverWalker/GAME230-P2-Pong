@@ -11,6 +11,7 @@ bool isGameOver = false;
 int winReqirement = 5;
 
 std::vector<Paddle*> paddles;
+std::vector<Powerup*> powerups;
 
 sf::Color p1Color(165, 105, 189, 100);
 sf::Color p2Color(244, 208, 63, 100);
@@ -25,6 +26,8 @@ sf::SoundBuffer bouncePaddleBuffer;
 sf::SoundBuffer bounceWallBuffer;
 sf::Sound sound;
 
+sf::Font font;
+
 void checkGameOver() {
 	if (p1Score >= winReqirement || p2Score >= winReqirement) {
 		isGameOver = true;
@@ -35,14 +38,18 @@ void resetGame() {
 	p1Score = 0;
 	p2Score = 0;
 	for (int i = 0; i < paddles.size(); i++) {
-		paddles.at(i)->position.y = WINDOW_HEIGHT / 2;
+		paddles.at(i)->reset();
 	}
+	powerups.clear();
+	frameCount = 0;
 	isGameOver = false;
 }
 
-void loadSounds() {
+void loadAssets() {
 	bouncePaddleBuffer.loadFromFile("bouncePaddle.wav");
 	bounceWallBuffer.loadFromFile("bounceWall.wav");
+
+	font.loadFromFile("JustMyType-KePl.ttf");
 }
 
 void playSound(int soundId) {

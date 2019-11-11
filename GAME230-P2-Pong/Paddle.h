@@ -16,9 +16,10 @@ public:
 	sf::Color outlineColor;
 
 	Paddle(float pX, float pY, bool aiMode, sf::Color color, sf::Color outlineColor);
-	void update();
+	void upgrade(int upType);
 	void draw(sf::RenderWindow& window);
 	void moveUp();
 	void moveDown();
 	void aiMove(Ball targetBall);
+	void reset();
 };

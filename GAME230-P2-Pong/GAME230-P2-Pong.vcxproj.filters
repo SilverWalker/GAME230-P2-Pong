@@ -30,6 +30,9 @@
     <ClCompile Include="ui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="powerup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h">
@@ -42,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Ui.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Powerup.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

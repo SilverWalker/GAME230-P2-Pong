@@ -17,8 +17,16 @@ Paddle::Paddle(float pX, float pY, bool aiMode, sf::Color color, sf::Color outli
 	this->outlineColor = outlineColor;
 }
 
-void Paddle::update()
+void Paddle::upgrade(int upType)
 {
+	switch (upType) {
+	case 1:
+		if (this->height < 200) this->height += 10;
+		break;
+	case 2:
+		if (this->speed < 2000.0f) this->speed += 200.0f;
+		break;
+	}
 }
 
 void Paddle::draw(sf::RenderWindow& window)
@@ -43,6 +51,9 @@ void Paddle::moveDown()
 {
 	if (this->position.y + this->height / 2 < WINDOW_HEIGHT) {
 		this->position.y += this->speed * dt.asSeconds();
+		if (this->position.y + this->height / 2 > WINDOW_HEIGHT) {
+			this->position.y = WINDOW_HEIGHT - (this->height / 2);
+		}
 	}
 }
 
@@ -55,4 +66,11 @@ void Paddle::aiMove(Ball targetBall)
 	else {
 		this->position.y > WINDOW_HEIGHT / 2 ? this->moveUp() : this->moveDown();
 	}
+}
+
+void Paddle::reset() {
+	this->speed = 800.0f;
+	this->width = 10;
+	this->height = 100;
+	this->position.y = WINDOW_HEIGHT / 2;
 }

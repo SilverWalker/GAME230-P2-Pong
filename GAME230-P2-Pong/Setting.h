@@ -3,6 +3,7 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include "Paddle.h"
+#include "Powerup.h"
 
 extern int WINDOW_WIDTH;
 extern int WINDOW_HEIGHT;
@@ -18,6 +19,7 @@ extern sf::Time dt;
 extern int frameCount;
 
 extern std::vector<Paddle*> paddles;
+extern std::vector<Powerup*> powerups;
 
 extern sf::Color p1Color;
 extern sf::Color p2Color;
@@ -28,7 +30,9 @@ extern sf::SoundBuffer bouncePaddleBuffer;
 extern sf::SoundBuffer bounceWallBuffer;
 extern sf::Sound sound;
 
+extern sf::Font font;
+
 extern void checkGameOver();
 extern void resetGame();
-extern void loadSounds();
+extern void loadAssets();
 extern void playSound(int soundId);

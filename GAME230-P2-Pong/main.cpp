@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdlib.h> 
+#include <time.h> 
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -12,22 +14,23 @@
 #include "Ball.h"
 #include "Paddle.h"
 #include "Ui.h"
+#include "Powerup.h"
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "PONG");
-	loadSounds();
+	loadAssets();
 	Paddle* paddleL = new Paddle(20.0f, float(WINDOW_HEIGHT / 2), false, p1Color, p1OutlineColor);
 	Paddle* paddleR = new Paddle(float(WINDOW_WIDTH - 20), float(WINDOW_HEIGHT / 2), true, p2Color, p2OutlineColor);
 	paddles.push_back(paddleL);
 	paddles.push_back(paddleR);
 	Ball ball(float(WINDOW_WIDTH / 2), float(WINDOW_HEIGHT / 2));
 	Ui ui;
+	srand(time(NULL));
 	while (window.isOpen())
 	{
 		dt = deltaClock.restart();
 		sf::Event event;
-		frameCount++;
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
@@ -67,6 +70,13 @@ int main()
 		window.clear();
 		ui.drawBg(window);
 		if (!isGameOver) {
+			frameCount++;
+			if (frameCount % 4000 == 0) {
+				int x = rand() % WINDOW_WIDTH * 0.5 + WINDOW_WIDTH * 0.25;
+				int y = rand() % WINDOW_HEIGHT * 0.65 + WINDOW_HEIGHT * 0.25;
+				int type = rand() % 2 + 1;
+				powerups.push_back(new Powerup(float(x), float(y), type));
+			}
 			ball.update();
 			if (paddleL->aiMode) paddleL->aiMove(ball);
 			if (paddleR->aiMode) paddleR->aiMove(ball);
@@ -74,6 +84,9 @@ int main()
 			paddleL->draw(window);
 			paddleR->draw(window);
 			ball.draw(window);
+			for (int i = 0; i < powerups.size(); i++) {
+				powerups.at(i)->draw(window);
+			}
 		}
 		else {
 			ui.drawGameOver(window);
