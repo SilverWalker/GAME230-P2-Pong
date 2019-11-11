@@ -15,6 +15,7 @@ extern int winReqirement;
 
 extern sf::Clock deltaClock;
 extern sf::Time dt;
+extern int frameCount;
 
 extern std::vector<Paddle*> paddles;
 

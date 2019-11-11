@@ -27,6 +27,7 @@ int main()
 	{
 		dt = deltaClock.restart();
 		sf::Event event;
+		frameCount++;
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)

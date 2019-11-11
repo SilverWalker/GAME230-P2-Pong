@@ -19,6 +19,7 @@ sf::Color p2OutlineColor(244, 208, 63, 255);
 
 sf::Clock deltaClock;
 sf::Time dt;
+int frameCount = 0;
 
 sf::SoundBuffer bouncePaddleBuffer;
 sf::SoundBuffer bounceWallBuffer;

@@ -13,7 +13,7 @@ Ball::Ball(float pX, float pY)
 	this->angle = 45;
 	this->radius = 10.0f;
 	this->color = sf::Color(255, 255, 255);
-	for (int i = 0; i < 50; i++) {
+	for (int i = 0; i < 10; i++) {
 		this->trails.push_back(sf::Vector2f(this->position.x, this->position.y));
 	}
 
@@ -34,8 +34,10 @@ void Ball::update()
 	this->position.y += this->velocity.y * dt.asSeconds();
 	this->checkCollision();
 
-	this->trails.erase(this->trails.begin());
-	this->trails.push_back(sf::Vector2f(this->position.x, this->position.y));
+	if (frameCount % 10 == 0) {
+		this->trails.erase(this->trails.begin());
+		this->trails.push_back(sf::Vector2f(this->position.x, this->position.y));
+	}
 }
 
 void Ball::draw(sf::RenderWindow& window)
@@ -44,7 +46,7 @@ void Ball::draw(sf::RenderWindow& window)
 	this->shape.setFillColor(this->color);
 	this->shape.setOutlineColor(sf::Color::White);
 	
-	for (int i = 0; i < this->trails.size(); i+=5) {
+	for (int i = 0; i < this->trails.size(); i++) {
 		this->trailShape.setRadius(this->radius * i / this->trails.size());
 		this->trailShape.setOrigin(this->radius *i / this->trails.size(), this->radius * i / this->trails.size());
 		this->trailShape.setPosition(this->trails.at(i));
@@ -70,6 +72,7 @@ void Ball::checkCollision()
 		this->position.y = float(WINDOW_HEIGHT / 2);
 		this->speed = 300.0f;
 		this->color = sf::Color(255, 255, 255);
+		frameCount = 0;
 	}
 	//paddle
 	for (int i = 0; i < paddles.size(); i++) {
